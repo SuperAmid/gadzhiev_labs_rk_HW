@@ -1,0 +1,47 @@
+# test_queries.py
+
+import unittest
+from classes import Document, Section, DocumentSection
+from queries import find_documents_ending_with_ov, average_salary_by_section, sections_starting_with_a
+
+class TestQueries(unittest.TestCase):
+    def setUp(self):
+        self.sections = [
+            Section(1, "Административный"),
+            Section(2, "Финансовый"),
+            Section(3, "Отдел")
+        ]
+        self.documents = [
+            Document(1, "Документов", 1000, 1),
+            Document(2, "Документ", 2000, 2),
+            Document(3, "Файл", 1500, 1),
+            Document(4, "Файл", 3000, 3)
+        ]
+        self.doc_secs = [
+            DocumentSection(1, 1),
+            DocumentSection(2, 2),
+            DocumentSection(3, 1),
+            DocumentSection(4, 3)
+        ]
+
+    def test_find_documents_ending_with_ov(self):
+        result = find_documents_ending_with_ov(self.documents, self.sections)
+        expected = [("Документов", "Административный")]
+        self.assertEqual(result, expected)
+
+    def test_average_salary_by_section(self):
+        result = average_salary_by_section(self.documents, self.sections)
+        expected = [
+            ("Финансовый", 2000.0),
+            ("Административный", 1250.0),
+            ("Отдел", 3000.0)
+        ]
+        self.assertEqual(result, expected)
+
+    def test_sections_starting_with_a(self):
+        result = sections_starting_with_a(self.documents, self.sections, self.doc_secs)
+        expected = [("Административный", ["Документов", "Файл"])]
+        self.assertEqual(result, expected)
+
+if __name__ == '__main__':
+    unittest.main()
