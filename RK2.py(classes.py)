@@ -1,0 +1,18 @@
+
+
+class Document:
+    def __init__(self, id, title, salary, section_id):
+        self.id = id
+        self.title = title
+        self.salary = salary
+        self.section_id = section_id
+
+class Section:
+    def __init__(self, id, name):
+        self.id = id
+        self.name = name
+
+class DocumentSection:
+    def __init__(self, doc_id, section_id):
+        self.doc_id = doc_id
+        self.section_id = section_id
