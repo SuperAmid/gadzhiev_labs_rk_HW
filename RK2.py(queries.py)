@@ -1,0 +1,27 @@
+
+def find_documents_ending_with_ov(documents, sections):
+    return [
+        (doc.title, next(sec.name for sec in sections if sec.id == doc.section_id))
+        for doc in documents if doc.title.endswith("ов")
+    ]
+
+def average_salary_by_section(documents, sections):
+    result = []
+    for sec in sections:
+        sec_docs = [doc for doc in documents if doc.section_id == sec.id]
+        if sec_docs:
+            avg_salary = sum(doc.salary for doc in sec_docs) / len(sec_docs)
+            result.append((sec.name, avg_salary))
+    return sorted(result, key=lambda x: x[1])
+
+
+
+def sections_starting_with_a(documents, sections, doc_secs):
+    result = []
+    for sec in sections:
+        if sec.name.startswith("А"):
+            sec_docs = [
+                doc.title for doc in documents if doc.section_id == sec.id
+            ]
+            result.append((sec.name, sec_docs))
+    return result
